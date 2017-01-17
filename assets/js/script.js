@@ -9,4 +9,64 @@ clicking any of the giphy images once will make them play, clicking them again w
 everytime a different button is clicked the previous search is cleared and replaced with the new search
 
 when the clear button is pressed, the default array buttons are created, but user created buttons and images are cleared
+*/
 
+//document ready function
+$(function() {
+	
+	
+	var buttonArray = ["ducks", "celebration", "beach"];
+
+	createButtons();
+
+	
+	//brings everything to default state on click
+	$("#clear").on("click", function(){
+		buttonArray = ["ducks", "celebration", "beach"];
+		createButtons();
+		$("#imagerow").html("");
+	});
+
+	//function to create buttons from array
+	function createButtons(){
+		$("#buttonrow").html("");
+		for(i = 0; i < buttonArray.length; i++){
+			$("#buttonrow").append("<button type='button' class='btn btn-danger'>" + buttonArray[i] + "</button>")
+		}
+	}
+
+
+
+
+	//creates new button from search field, also clears search field
+	$("#form").submit(function(event){
+		event.preventDefault();
+		var $formValue = $("#giphySearch").val();
+		if($formValue.length > 0){
+			$("#form").trigger("reset");
+			buttonArray.push($formValue);
+			createButtons();
+		}else {
+			console.log("Please enter SOMETHING");
+		}
+	});
+
+
+$("#buttonrow").on("click", ".btn-danger", function(){
+
+	$.ajax({
+
+		//sets limit to 10 in url
+	    url: "http://api.giphy.com/v1/gifs/search?q=" + $(this).text() +  "&api_key=dc6zaTOxFJmzC&limit=10",
+	    type: "GET",
+	    success: function(response) {
+	    	for(i = 0; i < response.data.length; i++){
+	        $("#imagerow").append("<img src=" + response.data[i].images.original_still.url + "></img>")
+			}
+	}
+});
+
+
+});
+
+});
