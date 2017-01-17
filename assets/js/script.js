@@ -70,7 +70,7 @@ $(function() {
         $.ajax({
 
             //sets limit to 10 in url
-            url: "HTTPS://api.giphy.com/v1/gifs/search?q=" + $(this).text() + "&api_key=dc6zaTOxFJmzC&limit=10",
+            url: "https//api.giphy.com/v1/gifs/search?q=" + $(this).text() + "&api_key=dc6zaTOxFJmzC&limit=10",
             type: "GET",
             success: function(response) {
             	console.log(response);
