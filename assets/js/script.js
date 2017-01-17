@@ -15,14 +15,14 @@ when the clear button is pressed, the default array buttons are created, but use
 $(function() {
 
 
-    var buttonArray = ["attack", "celebration", "beach"];
+    var topics = ["Star Wars", "Jurassic Park", "Ghostbusters"];
 
     createButtons();
 
 
     //brings everything to default state on click
     $("#clear").on("click", function() {
-        buttonArray = ["attack", "celebration", "beach"];
+        topics = ["Star Wars", "Jurassic Park", "Ghostbusters"];
         createButtons();
         $("#imagerow").html("");
     });
@@ -30,8 +30,8 @@ $(function() {
     //function to create buttons from array
     function createButtons() {
         $("#buttonrow").html("");
-        for (i = 0; i < buttonArray.length; i++) {
-            $("#buttonrow").append("<button type='button' class='btn btn-danger'>" + buttonArray[i] + "</button>")
+        for (i = 0; i < topics.length; i++) {
+            $("#buttonrow").append("<button type='button' class='btn btn-danger'><i class='fa fa-play' aria-hidden='true'></i> " + topics[i] + "</button>")
         }
     }
 
@@ -56,7 +56,7 @@ $(function() {
         var $formValue = $("#giphySearch").val();
         if ($formValue.length > 0) {
             $("#form").trigger("reset");
-            buttonArray.push($formValue);
+            topics.push($formValue);
             createButtons();
         } else {
             console.log("Please enter a value");
@@ -73,8 +73,9 @@ $(function() {
             url: "http://api.giphy.com/v1/gifs/search?q=" + $(this).text() + "&api_key=dc6zaTOxFJmzC&limit=10",
             type: "GET",
             success: function(response) {
+            	console.log(response);
                 for (i = 0; i < response.data.length; i++) {
-                    $("#imagerow").append("<img class='image' data-state='still' data-animate='" + response.data[i].images.original.url + "' data-still='" + response.data[i].images.original_still.url +"' src='" + response.data[i].images.original_still.url + "'></img>")
+                    $("#imagerow").append("<figure><img class='image' data-state='still' data-animate='" + response.data[i].images.original.url + "' data-still='" + response.data[i].images.original_still.url +"' src='" + response.data[i].images.original_still.url + "'>" + "<figcaption> Rating:  <span class='text-uppercase'>" + response.data[i].rating + "</span></figcaption> </img></figure>")
 
                 }
             }

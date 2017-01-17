@@ -1,13 +1,40 @@
+
+html, body {
+	background: #202020;
+}
+
 .col-md-12 {
 	margin: 20px;
+}
+
+
+h1 {
+	font-family: 'Bowlby One SC', cursive;
+	font-size: 75px;
+	color: #E0E0E0
 }
 
 img {
 	margin: 10px;
 	height: 200px;
-	border: solid black;
+	border: solid #EEE1E0;
+
+
 }
 
 .btn-danger {
 	margin: 5px;
+}
+
+figure {
+	display: inline-block;
+}
+
+figcaption {
+	color: #E0E0E0
+}
+
+.popcorn {
+	height: 100px;
+	border: none;
 }
