@@ -70,18 +70,20 @@ $(function() {
         $.ajax({
 
             //sets limit to 10 in url
-            url: "https//api.giphy.com/v1/gifs/search?q=" + $(this).text() + "&api_key=dc6zaTOxFJmzC&limit=10",
-            
+            url: "https://api.giphy.com/v1/gifs/search?q=" + $(this).text() + "&api_key=dc6zaTOxFJmzC&limit=10",
+            error: function(xhr, error){
+                console.debug(xhr); console.debug(error);
+            },
             success: function(response) {
-            	console.log(response);
+            	
                 for (i = 0; i < response.data.length; i++) {
-                    $("#imagerow").append("<figure><img class='image' data-state='still' data-animate='" + response.data[i].images.original.url + "' data-still='" + response.data[i].images.original_still.url +"' src='" + response.data[i].images.original_still.url + "'>" + "<figcaption> Rating:  <span class='text-uppercase'>" + response.data[i].rating + "</span></figcaption> </img></figure>")
+                    $("#imagerow").append("<figure><img class='image' data-state='still' data-animate='" + response.data[i].images.original.url + "' data-still='" + response.data[i].images.original_still.url +"' src='" + response.data[i].images.original_still.url + "'>" + "<figcaption> Rating:  <span class='text-uppercase'>" + response.data[i].rating + "</span></figcaption> </img></figure>");
 
                 }
             }
         });
-
-
     });
 
 });
+
+
